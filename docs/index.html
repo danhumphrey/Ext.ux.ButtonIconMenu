@@ -1,0 +1,520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Ext.ux.ButtonIconMenu Examples</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/obsidian.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/resources/css/ext-all.css" media="screen"
+          rel="Stylesheet" type="text/css"/>
+    <style type="text/css">
+
+        body {
+            font-family: Roboto;
+            padding: 0px 80px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        p {
+            margin-bottom: 0.7em;
+        }
+
+        h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #eaecef;
+            margin: 0.67em 0;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin: 0.37em 0;
+        }
+
+        h1:first-of-type {
+            margin-top: 0.2em;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        .demo {
+            margin: 1.4em 0;
+        }
+
+        .icon_blue {
+            background: url('icons/bullet_blue.gif') no-repeat !important;
+        }
+
+        .x-buttoniconmenu-over .icon_blue {
+            background: url('icons/bullet_blue_over.gif') no-repeat !important;
+        }
+
+        .icon_blank {
+            background: url('icons/bullet_white.gif') no-repeat !important;
+        }
+
+        .icon_invalid {
+            background: url('icons/bullet_invalid.gif') no-repeat !important;
+        }
+
+        .icon_star {
+            background: url('icons/bullet_star.gif') no-repeat !important;
+        }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/adapter/ext/ext-base-debug.js"
+            type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/ext-all-debug.js" type="text/javascript"></script>
+    <script type="text/javascript" src="button-icon-menu.js"></script>
+    <script type="text/javascript">
+
+      var onChange = function (btn, oldVal, newVal) {
+        console.log(btn.id + " changed from '" + oldVal + "' to '" + newVal + "'");
+      };
+
+      Ext.onReady(function () {
+
+        Ext.QuickTips.init();
+
+        /*
+         * Example 1
+         */
+        var iconButton1 = new Ext.ux.ButtonIconMenu({
+          id: 'iconButton1',
+          value: 'R',
+          icons: [
+            {
+              text: 'Green',
+              value: 'G',
+              icon: 'icons/bullet_green.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Red',
+              value: 'R',
+              icon: 'icons/bullet_red.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Blue',
+              value: 'B',
+              icon: '',
+              iconCls: 'icon_blue'
+            }
+          ],
+          listeners: {
+            change: onChange
+          },
+          renderTo: 'e1'
+        });
+
+        /*
+         * Example 2
+         */
+        var iconButton2 = new Ext.ux.ButtonIconMenu({
+          id: 'iconButton2',
+          blankIconCls: 'icon_blank',
+          invalidIconCls: 'icon_invalid',
+          cycleMode: true,
+          defaultMenuPosition: 'top',
+          defaultValue: 'R',
+          value: 'G',
+          icons: [
+            {
+              text: 'Green',
+              value: 'G',
+              icon: 'icons/bullet_green.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Red',
+              value: 'R',
+              icon: 'icons/bullet_red.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Blue',
+              value: 'B',
+              icon: '',
+              iconCls: 'icon_blue'
+            }
+
+          ],
+          listeners: {
+            change: onChange
+          },
+          renderTo: 'e2'
+        });
+
+        new Ext.Button({
+          text: 'Set to blank',
+          renderTo: 'e2',
+          handler: function () {
+            iconButton2.setValue('');
+          }
+        });
+
+        new Ext.Button({
+          text: 'Set to invalid',
+          renderTo: 'e2',
+          handler: function () {
+            iconButton2.setValue('invalid value');
+          }
+        });
+
+        /*
+         * Example 3
+         */
+        var iconButton3 = new Ext.ux.ButtonIconMenu({
+          id: 'iconButton3',
+          cycleMode: true,
+          value: 'G',
+          icons: [
+            {
+              text: 'Green',
+              value: 'G',
+              icon: 'icons/bullet_green.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Red',
+              value: 'R',
+              icon: 'icons/bullet_red.gif',
+              iconCls: '',
+              inMenu: false
+            },
+            {
+              text: 'Blue',
+              value: 'B',
+              icon: '',
+              iconCls: 'icon_blue',
+              inCycle: false
+            },
+            {
+              text: 'Star',
+              value: '*',
+              icon: '',
+              iconCls: 'icon_star',
+              selectable: false
+            }
+          ],
+          listeners: {
+            change: onChange
+          },
+          renderTo: 'e3'
+        });
+
+        new Ext.Button({
+          text: 'Set to *',
+          renderTo: 'e3',
+          handler: function () {
+            iconButton3.setValue('*');
+          }
+        });
+
+        /*
+         * Example 4
+         */
+
+        var data = [
+          [ 'Green', 'G', 'icons/bullet_green.gif', '', true, true, true, 'The Green Icon', 'Green Title' ],
+          [ 'Red', 'R', 'icons/bullet_red.gif', '', false, true, true, 'The Red Icon', '' ],
+          [ 'Blue', 'B', '', 'icon_blue', true, false, true, 'The Blue Icon', '' ]
+        ];
+
+        var store = new Ext.data.SimpleStore({
+          fields: [ 'text', 'value', 'icon', 'iconCls', 'inMenu', 'inCycle', 'selectable', 'qtip', 'qtitle' ],
+          data: data
+        });
+
+        var iconButton4 = new Ext.ux.ButtonIconMenu({
+          id: 'iconButton4',
+          value: 'B',
+          cycleMode: true,
+          store: store,
+          renderTo: 'e4',
+          listeners: {
+            change: onChange
+          },
+        });
+
+      });
+    </script>
+
+</head>
+<body>
+
+<a href="https://github.com/danhumphrey/Ext.ux.ButtonIconMenu"><img
+        style="position: absolute; top: 0; right: 0; border: 0;"
+        src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67"
+        alt="Fork me on GitHub"
+        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+<h1>Ext.ux.ButtonIconMenu</h1>
+<p>ButtonIconMenu is a button that allows a pre-defined selection of icons to be selected via a selector menu, or by
+    cycling through the configured icons/values (if <em>cycleMode</em> is set to true)</p>
+<hr>
+<h2>Example 1</h2>
+<p>This example demonstrates the base functionality using the default component configuration.</p>
+<p>Notice that the icons can be specified using either <code>icon</code> or <code>iconCls</code> config options.</p>
+<p>You will also notice an additional mouseover css class applied to the blue icon</p>
+<div id="e1" class="demo"></div>
+<p>The following code was used to create this example:</p>
+    <pre>
+      <code class="javascript">
+
+        var onChange = function (btn, oldVal, newVal) {
+          console.log(btn.id + " changed from '" + oldVal + "' to '" + newVal + "'");
+        };
+
+        var iconButton1 = new Ext.ux.ButtonIconMenu({
+          id: 'iconButton1',
+          value: 'R',
+          icons: [
+            {
+              text: 'Green',
+              value: 'G',
+              icon: 'icons/bullet_green.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Red',
+              value: 'R',
+              icon: 'icons/bullet_red.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Blue',
+              value: 'B',
+              icon: '',
+              iconCls: 'icon_blue'
+            }
+          ],
+          listeners: {
+            change: onChange
+          },
+          renderTo: 'e1'
+        });
+      </code>
+      <code class="css">
+        .icon_blue {
+            background: url('icons/bullet_blue.gif') no-repeat !important;
+        }
+
+        .x-buttoniconmenu-over .icon_blue {
+            background: url('icons/bullet_blue_over.gif') no-repeat !important;
+        }
+      </code>
+    </pre>
+
+    <h2>Example 2</h2>
+    <p>This example demonstrates the <code>cycleMode</code> config and overriding the default icons.</p>
+    <p>When <code>cycleMode</code> is set to <code>true</code>, a click no longer displays the menu, but instead cycles through the available icons. The menu can still be accessed via a right click.</p>
+    <p>Notice that the <code>blankIconCls</code> and <code>invalidIconCls</code> config options have been used to override the default icons that appear for blank or invalid data.</p>
+    <p>In this example, the red icon has been configured with <code>defaultValue</code> set to true. Clicking the CellIconMenu whilst pressing the <kbd>CTRL</kbd>/<kbd>CMD</kbd> key will always select the default icon/value.</p>
+    <p>This example also demonstrates the ability to programmatically set the value of the iconButton</p>
+    <div id="e2" class="demo"></div>
+<p>The following code was used to create this example:</p>
+<pre>
+    <code class="javascript">
+
+        var onChange = function (btn, oldVal, newVal) {
+          console.log(btn.id + " changed from '" + oldVal + "' to '" + newVal + "'");
+        };
+
+        var iconButton2 = new Ext.ux.ButtonIconMenu({
+          id: 'iconButton2',
+          blankIconCls: 'icon_blank',
+          invalidIconCls: 'icon_invalid',
+          cycleMode: true,
+          defaultMenuPosition: 'top',
+          defaultValue: 'R',
+          value: 'G',
+          icons: [
+            {
+              text: 'Green',
+              value: 'G',
+              icon: 'icons/bullet_green.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Red',
+              value: 'R',
+              icon: 'icons/bullet_red.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Blue',
+              value: 'B',
+              icon: '',
+              iconCls: 'icon_blue'
+            }
+
+          ],
+          listeners: {
+            change: onChange
+          },
+          renderTo: 'e2'
+        });
+
+        new Ext.Button({
+          text: 'Set to blank',
+          renderTo: 'e2',
+          handler: function () {
+            iconButton2.setValue('');
+          }
+        });
+
+        new Ext.Button({
+          text: 'Set to invalid',
+          renderTo: 'e2',
+          handler: function () {
+            iconButton2.setValue('invalid value');
+          }
+        });
+    </code>
+    <code class="css">
+        .icon_blue {
+            background: url('icons/bullet_blue.gif') no-repeat !important;
+        }
+
+        .x-buttoniconmenu-over .icon_blue {
+            background: url('icons/bullet_blue_over.gif') no-repeat !important;
+        }
+
+        .icon_blank {
+            background: url('icons/bullet_white.gif') no-repeat !important;
+        }
+
+        .icon_invalid {
+            background: url('icons/bullet_invalid.gif') no-repeat !important;
+        }
+    </code>
+    </pre>
+
+    <h2>Example 3</h2>
+    <p>This example demonstrates some of the additional config options.</p>
+    <p>Notice that an additional 'star' icon/value was defined with the <code>selectable</code> config set to <code>false</code>. This prevents the icon/value from being selected by a user.</p>
+    <p>Also notice in this example that the Red icon will not appear in the menu (due to setting the <code>inMenu</code> config to <code>false</code>) and the blue icon will not appear in the cycle (due to setting the <code>inCycle</code> config to <code>false</code>).</p>
+    <div id="e3"></div>
+    <p>The following code was used to create this example:</p>
+    <pre>
+      <code class="javascript">
+
+        var onChange = function (btn, oldVal, newVal) {
+          console.log(btn.id + " changed from '" + oldVal + "' to '" + newVal + "'");
+        };
+
+        var iconButton3 = new Ext.ux.ButtonIconMenu({
+          id: 'iconButton3',
+          cycleMode: true,
+          value: 'G',
+          icons: [
+            {
+              text: 'Green',
+              value: 'G',
+              icon: 'icons/bullet_green.gif',
+              iconCls: ''
+            },
+            {
+              text: 'Red',
+              value: 'R',
+              icon: 'icons/bullet_red.gif',
+              iconCls: '',
+              inMenu: false
+            },
+            {
+              text: 'Blue',
+              value: 'B',
+              icon: '',
+              iconCls: 'icon_blue',
+              inCycle: false
+            },
+            {
+              text: 'Star',
+              value: '*',
+              icon: '',
+              iconCls: 'icon_star',
+              selectable: false
+            }
+          ],
+          listeners: {
+            change: onChange
+          },
+          renderTo: 'e3'
+        });
+
+        new Ext.Button({
+          text: 'Set to *',
+          renderTo: 'e3',
+          handler: function () {
+            iconButton3.setValue('*');
+          }
+        });
+      </code>
+      <code class="css">
+        .icon_blue {
+            background: url('icons/bullet_blue.gif') no-repeat !important;
+        }
+
+        .x-buttoniconmenu-over .icon_blue {
+            background: url('icons/bullet_blue_over.gif') no-repeat !important;
+        }
+
+        .icon_star {
+            background: url('icons/bullet_star.gif') no-repeat !important;
+        }
+      </code>
+    </pre>
+
+    <h2>Example 4</h2>
+    <p>This example demonstrates the icon configs being loaded from a data store.</p>
+    <p>You will also see tooltips in effect.</p>
+    <div id="e4"></div>
+    <p>The following code was used to create this example:</p>
+    <pre>
+      <code class="javascript">
+
+        var onChange = function (btn, oldVal, newVal) {
+          console.log(btn.id + " changed from '" + oldVal + "' to '" + newVal + "'");
+        };
+
+        var data = [
+          [ 'Green', 'G', 'icons/bullet_green.gif', '', true, true, true, 'The Green Icon', 'Green Title' ],
+          [ 'Red', 'R', 'icons/bullet_red.gif', '', false, true, true, 'The Red Icon', '' ],
+          [ 'Blue', 'B', '', 'icon_blue', true, false, true, 'The Blue Icon', '' ]
+        ];
+
+        var store = new Ext.data.SimpleStore({
+          fields: [ 'text', 'value', 'icon', 'iconCls', 'inMenu', 'inCycle', 'selectable', 'qtip', 'qtitle' ],
+          data: data
+        });
+
+        var iconButton4 = new Ext.ux.ButtonIconMenu({
+          id: 'iconButton4',
+          value: 'B',
+          cycleMode: true,
+          store: store,
+          renderTo: 'e4',
+          listeners: {
+            change: onChange
+          },
+        });
+      </code>
+      <code class="css">
+        .icon_blue {
+            background: url('icons/bullet_blue.gif') no-repeat !important;
+        }
+
+        .x-buttoniconmenu-over .icon_blue {
+            background: url('icons/bullet_blue_over.gif') no-repeat !important;
+        }
+      </code>
+    </pre>
+</div>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
